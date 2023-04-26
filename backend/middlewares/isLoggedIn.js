@@ -5,14 +5,14 @@ const User = db.user;
 
 const isLoggedIn = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
+    // const token = req.headers.authorization.split(" ")[1];
 
     if (!token) {
       res.status(401).send({
         message: "Unauthorized",
       });
     }
-
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const foundUser = await User.findOne({
       where: {

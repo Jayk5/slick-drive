@@ -6,10 +6,20 @@ export default function Nav() {
   const { isLogged, setIsLogged } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const signOutHandler = (e) => {
+  const signOutHandler = async (e) => {
     e.preventDefault();
+    try{
+      const response = await fetch("http://localhost:3000/user/logout", {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
     setIsLogged(false);
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate('/')
   };

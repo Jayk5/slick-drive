@@ -8,13 +8,14 @@ export default function File(props) {
   const info = props.details;
 
   const handleDelete = async () => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
     try {
       const response = await fetch(`http://localhost:3000/file/delete/${info.id}`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
       });
       const data = await response.json();
@@ -28,11 +29,12 @@ export default function File(props) {
   const handleDownload = async () => {
     console.log("downloaded");
     try {
-      const token = localStorage.getItem("token");
+      // const token = localStorage.getItem("token");
       const response = await fetch(`http://localhost:3000/file/download/${info.id}`, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
+        credentials: "include",
         headers: {
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
       });
       const blob = await response.blob();

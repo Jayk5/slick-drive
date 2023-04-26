@@ -7,7 +7,9 @@ const app = express();
 const port = 3000;
 
 const corsOptions = {
-  origin: "*",
+  origin: "http://localhost:5173",
+  methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+  credentials: true,
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());

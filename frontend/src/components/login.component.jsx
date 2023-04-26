@@ -21,11 +21,13 @@ export default function Login() {
       Axios.post("http://localhost:3000/user/login", {
         email,
         password,
+      }, {
+        withCredentials: true,
       })
         .then((response) => {
           console.log(response);
           setError(false);
-          localStorage.setItem("token", response.data.token);
+          // localStorage.setItem("token", response.data.token);
           localStorage.setItem("user", JSON.stringify(response.data.user));
           setIsLogged(true);
         })

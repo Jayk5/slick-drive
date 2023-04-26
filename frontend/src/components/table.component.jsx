@@ -14,13 +14,14 @@ export default function Altable(props) {
   if (id === undefined || id === null || id === "null") id = "";
   const [details, setDetails] = useState([]);
   const getDetails = async () => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
     try {
       const response = await fetch(`http://localhost:3000/folder/get/${id}`, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
       });
       const data = await response.json();
@@ -32,7 +33,6 @@ export default function Altable(props) {
   useEffect(() => {
     const getData = async () => {
       let data = await getDetails();
-      // console.log(data);
       data = [
         ...data.folders.map((d) => {
           return { ...d, type: "folder" };
@@ -55,11 +55,12 @@ export default function Altable(props) {
       formData.append("files", file);
       formData.append("parentFolder", id);
       formData.append("filename", file.name);
-      const token = localStorage.getItem("token");
+      // const token = localStorage.getItem("token");
       fetch(`http://localhost:3000/file/upload`, {
         method: "POST",
+        credentials: "include",
         headers: {
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
         body: formData,
       })
@@ -89,13 +90,14 @@ export default function Altable(props) {
   const navigate = useNavigate();
 
   const handleFolderDelete = async () => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
     try {
       const response = await fetch(`http://localhost:3000/folder/delete/${id}`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
       });
       const data = await response.json();
@@ -115,13 +117,11 @@ export default function Altable(props) {
       <thead>
         <tr>
           <th>
-            {/* <Link to={`/table/${backFolder}`}> */}
               <Left onClick={handleBackButtonClick}
                 style={{
                   fontSize: "1.5em",
                 }}
               />
-            {/* </Link> */}
           </th>
           <th>Name</th>
           <th>Size</th>

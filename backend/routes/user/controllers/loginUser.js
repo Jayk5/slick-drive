@@ -39,11 +39,15 @@ const loginUser = async (req, res) => {
       }
     );
     // res.setHeader("Set-Cookie", "test=value");
-    // res.cookie("token", "hehe");
+    res.cookie("token", token, {
+      httpOnly: true,
+      samesite: "none",
+      secure: true,
+      maxAge: 86400,
+    });
     return res.status(200).send({
       status: "success",
       user: foundUser,
-      token,
     });
   } catch (err) {
     console.log(err);

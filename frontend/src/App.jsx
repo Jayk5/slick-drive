@@ -9,7 +9,7 @@ import Table from "./components/table.component";
 import UserContext from "./contexts/userContext";
 
 function App() {
-  const user = localStorage.getItem("token") ? true : false;
+  const user = localStorage.getItem("user") ? true : false;
   const [isLogged, setIsLogged] = useState(user);
 
   return (
